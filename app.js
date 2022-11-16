@@ -31,6 +31,10 @@ app.get('/series', (req, res) => {
   res.render('series');
 });
 
+app.get('/add', (req,res) => {
+    res.render('add');
+})
+
 app.listen(3000, () => {
   console.log('Sunucu Başlatıldı');
 });
