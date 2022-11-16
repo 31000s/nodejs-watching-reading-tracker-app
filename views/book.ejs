@@ -1,0 +1,31 @@
+<html lang="tr">
+
+  <%- include('partials/_header') -%>
+
+
+<body>
+  <%- include('partials/_nav') -%>
+    <h1>Books Lists</h1>
+
+    
+			<% for (let i=0; i < Books.length; i++) { %>
+				<div class="box">
+	
+	
+	
+					<h2><%= Books[i].name %></h2>
+					<h3><%= Books[i].author %></h3>
+					<font><%= Books[i].publisher %></font>
+					<h4><%= Books[i].description %></h3>
+					<p><%= Books[i].status %></p>
+	
+	
+				</div>
+        <br>
+				<% } %>
+
+</body>
+
+  <%- include('partials/_footer') -%>
+
+</html>

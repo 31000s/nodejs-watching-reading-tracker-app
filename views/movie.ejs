@@ -1,0 +1,30 @@
+<html lang="tr">
+
+<%- include('partials/_header') -%>
+
+	<body>
+		<%- include('partials/_nav') -%>
+
+			<h1>Movies Lists</h1>
+
+			<% for (let i=0; i < Movies.length; i++) { %>
+				<div class="box">
+	
+	
+	
+					<h2><%= Movies[i].title %></h2>
+					<h3><%= Movies[i].subtitle %></h3>
+					<font><%= Movies[i].serial %></font>
+					<h4><%= Movies[i].status %></h4>
+					<p><%= Movies[i].description %></p>
+	
+	
+				</div>
+				<br>
+				<% } %>
+
+					<%- include('partials/_footer') -%>
+
+	</body>
+
+</html>
