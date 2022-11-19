@@ -1,0 +1,32 @@
+<html lang="tr">
+
+<%- include('partials/_header') -%>
+
+	<body>
+		<%- include('partials/_nav') -%>
+
+			<h1>
+				<%= moviePage.title %>
+			</h1>
+
+
+				<h3>
+					<%= moviePage.subtitle %>
+				</h3>
+				<font>
+					<%= moviePage.serial %>
+				</font>
+				<h4>
+					<%= moviePage.status %>
+				</h4>
+				<p>
+					<%= moviePage.description %>
+				</p>
+
+
+			<br>
+			<%- include('partials/_footer') -%>
+
+	</body>
+
+</html>

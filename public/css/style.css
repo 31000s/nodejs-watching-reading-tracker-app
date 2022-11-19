@@ -1,3 +1,10 @@
+body {
+    margin: 20px;
+}
 .box {
     border: 1px solid  black;
+}
+
+.inside {
+    margin-left: 20px;
 }

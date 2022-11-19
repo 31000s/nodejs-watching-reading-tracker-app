@@ -10,12 +10,15 @@
       <div class="box">
 
 
-
-        <h2><%= Series[i].title %></h2>
-        <h3><%= Series[i].subtitle %></h3>
-        <font><%= Series[i].serial %></font>
-        <h4><%= Series[i].status %></h4>
-        <p><%= Series[i].other %></p>
+        <div class="inside">
+          <h2><%= Series[i].title %></h2>
+          <h3><%= Series[i].subtitle %></h3>
+          <font><%= Series[i].serial %></font>
+          <h4><%= Series[i].status %></h4>
+          <p><%= Series[i].other %></p>
+          <a href="/serie/<%= Series[i]._id %>">Gönderiye Git</a>
+        </div>
+        <br><br>
       </div>
       <br>
       <% } %>

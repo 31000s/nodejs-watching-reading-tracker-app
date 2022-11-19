@@ -1,0 +1,33 @@
+<html lang="tr">
+
+
+<%- include('partials/_header') -%>
+
+	<body>
+		<%- include('partials/_nav') -%>
+
+			<h1>
+				<%= seriePage.title %>
+			</h1>
+
+
+			<h3>
+				<%= seriePage.subtitle %>
+			</h3>
+			<font>
+				<%= seriePage.serial %>
+			</font>
+			<h4>
+				<%= seriePage.status %>
+			</h4>
+			<p>
+				<%= seriePage.other %>
+			</p>
+
+
+			<br>
+			<%- include('partials/_footer') -%>
+
+	</body>
+
+</html>

@@ -48,7 +48,31 @@ app.get('/add', (req,res) => {
     res.render('add');
 });
 
-//ADD
+//Page
+
+app.get('/movie/:id', async (req,res) => {
+    const moviePage = await Movie.findById(req.params.id)
+    res.render('moviePage', {
+        moviePage
+    })
+})
+
+app.get('/serie/:id', async (req,res) => {
+    const seriePage = await Serie.findById(req.params.id)
+    res.render('seriePage', {
+        seriePage
+    });
+});
+
+
+app.get('/book/:id', async (req,res) => {
+    const bookPage = await Book.findById(req.params.id)
+    res.render('bookPage', {
+        bookPage
+    });
+});
+
+//Add
 app.post('/movies', async (req,res) =>{
     await Movie.create(req.body);
     res.redirect('/')

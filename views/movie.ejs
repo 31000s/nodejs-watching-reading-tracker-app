@@ -11,12 +11,15 @@
 				<div class="box">
 	
 	
-	
-					<h2><%= Movies[i].title %></h2>
-					<h3><%= Movies[i].subtitle %></h3>
-					<font><%= Movies[i].serial %></font>
-					<h4><%= Movies[i].status %></h4>
-					<p><%= Movies[i].description %></p>
+					<div class="inside">
+						<h2><%= Movies[i].title %></h2>
+						<h3><%= Movies[i].subtitle %></h3>
+						<font><%= Movies[i].serial %></font>
+						<h4><%= Movies[i].status %></h4>
+						<p><%= Movies[i].description %></p>
+					<a href="/movie/<%= Movies[i]._id %>">Gönderiye Git</a>
+					<br><br>
+					</div>
 	
 	
 				</div>
