@@ -1,0 +1,25 @@
+<html lang="tr">
+
+<%- include('partials/_header') -%>
+
+
+<body>
+  <%- include('partials/_nav') -%>
+
+    <form action="/movie/<%= movie._id %>?_method=PUT" method="post" required>
+
+      <input type="text" name="title" value="<%= movie.title %>" placeholder="Movie Title" required>
+      <input type="text" name="subtitle" value="<%= movie.subtitle %>" placeholder="Movie Subtitle" required>
+      <textarea name="description" rows="8" placeholder="Movie Description" required><%= movie.description %></textarea>
+      <br>
+      <input type="text" name="serial" value="<%= movie.serial %>" placeholder="Movie Serial" required>
+      <input type="text" name="status" value="<%= movie.status %>" placeholder="Movie Status" required>
+      <br><input type="file" name="image">
+      <button type="submit">Güncelle</button>
+    </form>
+
+  </body>
+
+  <%- include('partials/_footer') -%>
+
+</html>
