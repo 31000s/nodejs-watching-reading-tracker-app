@@ -7,7 +7,7 @@ const MovieSchema = new Schema({
     description: String,
     serial: String,
     status: String,
-    img: String
+    image: String
 });
 const Movie = mongoose.model('Movie', MovieSchema);
 module.exports = Movie;

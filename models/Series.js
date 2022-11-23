@@ -7,7 +7,7 @@ const SeriesSchema = new Schema({
     serial: String,
     status: String,
     other: String,
-    img: String
+    image: String
 });
 
 const Series = mongoose.model('Series', SeriesSchema);

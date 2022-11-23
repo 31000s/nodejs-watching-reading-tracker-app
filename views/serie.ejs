@@ -1,30 +1,41 @@
 <html lang="tr">
 
-  <%- include('partials/_header') -%>
+<%- include('partials/_header') -%>
 
-<body>
-  <%- include('partials/_nav') -%>
+  <body>
+    <%- include('partials/_nav') -%>
 
-    <h1>Series Lists</h1>
-    <% for (let i=0; i < Series.length; i++) { %>
-      <div class="box">
+      <h1>Series Lists</h1>
+      <% for (let i=0; i < Series.length; i++) { %>
+        <div class="box">
 
 
-        <div class="inside">
-          <h2><%= Series[i].title %></h2>
-          <h3><%= Series[i].subtitle %></h3>
-          <font><%= Series[i].serial %></font>
-          <h4><%= Series[i].status %></h4>
-          <p><%= Series[i].other %></p>
-          <a href="/serie/<%= Series[i]._id %>">Gönderiye Git</a>
+          <div class="inside">
+            
+            <h2>
+              <%= Series[i].title %>
+            </h2>
+            <h3>
+              <%= Series[i].subtitle %>
+            </h3>
+            <font>
+              <%= Series[i].serial %>
+            </font>
+            <h4>
+              <%= Series[i].status %>
+            </h4>
+            <p>
+              <%= Series[i].other %>
+            </p>
+            <a href="/serie/<%= Series[i]._id %>">Gönderiye Git</a>
+          </div>
+          <br><br>
         </div>
-        <br><br>
-      </div>
-      <br>
-      <% } %>
+        <br>
+        <% } %>
 
-    <%- include('partials/_footer') -%>
+          <%- include('partials/_footer') -%>
 
-</body>
+  </body>
 
 </html>

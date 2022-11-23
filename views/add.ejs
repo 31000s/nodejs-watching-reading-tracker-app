@@ -3,60 +3,60 @@
 <%- include('partials/_header') -%>
 
 
-<body>
-  <%- include('partials/_nav') -%>
-    <h1>Add</h1>
+  <body>
+    <%- include('partials/_nav') -%>
+      <h1>Add</h1>
 
-   <div class="box">
-    <h3>Movie Add</h3>
-    <form action="/movies" method="post" required>
+      <div class="box">
+        <h3>Movie Add</h3>
+        <form action="/movies" method="post" encType="multipart/form-data">
 
-      <input type="text" name="title" placeholder="Movie Title" required>
-      <input type="text" name="subtitle" placeholder="Movie Subtitle" required>
-      <textarea name="description" rows="8" placeholder="Movie Description" required></textarea>
+          <input type="text" name="title" placeholder="Movie Title" required>
+          <input type="text" name="subtitle" placeholder="Movie Subtitle" required>
+          <textarea name="description" rows="8" placeholder="Movie Description" required></textarea>
+          <br>
+          <input type="text" name="serial" placeholder="Movie Serial" required>
+          <input type="text" name="status" placeholder="Movie Status" required>
+          <br><input type="file" name="image">
+          <button type="submit">Ekle</button>
+        </form>
+      </div>
+
       <br>
-      <input type="text" name="serial" placeholder="Movie Serial" required>
-      <input type="text" name="status" placeholder="Movie Status" required>
-      <br><input type="file" name="image">
-      <button type="submit">Ekle</button>
-    </form>
-   </div>
 
-   <br>
+      <div class="box">
+        <h3>Series Add</h3>
+        <form action="/series" method="post" encType="multipart/form-data">
 
-   <div class="box">
-    <h3>Series Add</h3>
-    <form action="/series" method="post" required>
+          <input type="text" name="title" placeholder="Series Title" required>
+          <input type="text" name="subtitle" placeholder="Series Subtitle" required>
+          <textarea name="other" rows="8" placeholder="Series other" required></textarea>
+          <br>
+          <input type="text" name="serial" placeholder="Series Serial" required>
+          <input type="text" name="status" placeholder="Series Status" required>
+          <br><input type="file" name="image">
+          <button type="submit">Ekle</button>
+        </form>
+      </div>
 
-      <input type="text" name="title" placeholder="Series Title" required>
-      <input type="text" name="subtitle" placeholder="Series Subtitle" required>
-      <textarea name="other" rows="8" placeholder="Series other" required></textarea>
-      <br>
-      <input type="text" name="serial" placeholder="Series Serial" required>
-      <input type="text" name="status" placeholder="Series Status" required>
-      <br><input type="file" name="image">
-      <button type="submit">Ekle</button>
-    </form>
-  </div>
+      <div class="box">
+        <h3>Book Add</h3>
+        <form action="/books" method="post" encType="multipart/form-data">
 
-    <div class="box">
-      <h3>Book Add</h3>
-      <form action="/books" method="post" required>
-  
-        <input type="text" name="name" placeholder="Book Name" required>
-        <input type="text" name="author" placeholder="Book Author" required>
-        <input type="text" name="publisher" placeholder="Book Publisher" required>
-        <textarea name="description" rows="8" placeholder="Book description" required></textarea>
-        <br>
-        <input type="text" name="status" placeholder="Book Status" required>
-        <br><input type="file" name="image">
-        <button type="submit">Ekle</button>
-      </form>
+          <input type="text" name="name" placeholder="Book Name" required>
+          <input type="text" name="author" placeholder="Book Author" required>
+          <input type="text" name="publisher" placeholder="Book Publisher" required>
+          <textarea name="description" rows="8" placeholder="Book description" required></textarea>
+          <br>
+          <input type="text" name="status" placeholder="Book Status" required>
+          <br><input type="file" name="image">
+          <button type="submit">Ekle</button>
+        </form>
 
-   </div>
+      </div>
 
-   <br><br><br>
-</body>
+      <br><br><br>
+  </body>
 
   <%- include('partials/_footer') -%>
 

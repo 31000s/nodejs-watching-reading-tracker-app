@@ -2,16 +2,16 @@ const express = require('express');
 const path = require('path');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
+const fs = require('fs')
 const methodOvveride = require('method-override')
+
+const fileUpload = require('express-fileupload')
 
 const Movie = require('./models/Movie')
 const Serie = require('./models/Series')
 const Book = require('./models/Book')
 
-mongoose.connect('', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
+mongoose.connect('MONGODB VERİTABANI LİNKİ')
 
 const app = express();
 
@@ -19,6 +19,7 @@ app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(fileUpload())
 app.use(methodOvveride('_method'));
 
 app.get('/', async (req, res) => {
@@ -49,6 +50,64 @@ app.get('/book', async (req, res) => {
 app.get('/add', (req,res) => {
     res.render('add');
 });
+
+app.post('/series', async (req, res) => {
+    const uploadDir = 'public/uploads/serieImage';
+  
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+  
+    let uploadeImage = req.files.image;
+    let uploadPath = __dirname + '/public/uploads/SerieImage/' + uploadeImage.name;
+  
+    uploadeImage.mv(uploadPath, async () => {
+      await Serie.create({
+        ...req.body,
+        image: '/uploads/SerieImage/' + uploadeImage.name,
+      });
+      res.redirect('/serie');
+    });
+  });
+
+app.post('/movies', async (req, res) => {
+    const uploadDir = 'public/uploads/movieImage';
+  
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+  
+    let uploadeImage = req.files.image;
+    let uploadPath = __dirname + '/public/uploads/movieImage/' + uploadeImage.name;
+  
+    uploadeImage.mv(uploadPath, async () => {
+      await Movie.create({
+        ...req.body,
+        image: '/uploads/movieImage/' + uploadeImage.name,
+      });
+      res.redirect('/movie');
+    });
+  });
+
+  app.post('/books', async (req, res) => {
+    const uploadDir = 'public/uploads/bookImage';
+  
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir);
+    }
+  
+    let uploadeImage = req.files.image;
+    let uploadPath = __dirname + '/public/uploads/bookImage/' + uploadeImage.name;
+  
+    uploadeImage.mv(uploadPath, async () => {
+      await Book.create({
+        ...req.body,
+        image: '/uploads/bookImage/' + uploadeImage.name,
+      });
+      res.redirect('/book');
+    });
+  });
+
 
 //Page
 
