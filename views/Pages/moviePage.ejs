@@ -1,9 +1,9 @@
 <html lang="tr">
 
-<%- include('partials/_header') -%>
+<%- include('../partials/_header') -%>
 
 	<body>
-		<%- include('partials/_nav') -%>
+		<%- include('../partials/_nav') -%>
 			<br><br>
 			<img src="<%= moviePage.image %>" alt="fotoğraf" width="300" height="300">
 
@@ -27,7 +27,7 @@
 			<a href="/movie/<%= moviePage._id %>?_method=DELETE" onclick="return confirm('Emin misin?')">Sil</a>
 
 			<br>
-			<%- include('partials/_footer') -%>
+			<%- include('../partials/_footer') -%>
 
 	</body>
 

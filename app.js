@@ -1,20 +1,23 @@
 const express = require('express');
-const path = require('path');
 const mongoose = require('mongoose');
 const ejs = require('ejs');
-const fs = require('fs');
 const methodOvveride = require('method-override');
-
 const fileUpload = require('express-fileupload');
 
 const Movie = require('./models/Movie');
 const Serie = require('./models/Series');
 const Book = require('./models/Book');
 
-mongoose.connect(
-  ''
-);
+const PagesControllers = require('./controllers/PagesControllers');
+const PagesIdControllers = require('./controllers/PagesIdControllers');
+const AddControllers = require('./controllers/AddControllers');
+const EditControllers = require('./controllers/EditControllers');
+const UploadControllers = require('./controllers/UploadControllers');
+const DeleteControllers = require('./controllers/DeleteControllers');
 
+const ayarlar = require('./token.json');
+
+mongoose.connect(`${ayarlar.mongodbURL}`); //MONGODB VERİTABANI BAĞLANTISI
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -28,210 +31,38 @@ app.use(
   })
 );
 
-app.get('/', async (req, res) => {
-  res.render('index');
-});
+//Pages
+app.get('/', PagesControllers.indexPage);
+app.get('/movie', PagesControllers.moviePage);
+app.get('/serie', PagesControllers.seriePage);
+app.get('/book', PagesControllers.bookPage);
+app.get('/add', PagesControllers.addPage);
 
-app.get('/movie', async (req, res) => {
-  const Movies = await Movie.find({});
-  res.render('movie', {
-    Movies,
-  });
-});
-
-app.get('/serie', async (req, res) => {
-  const Series = await Serie.find({});
-  res.render('serie', {
-    Series,
-  });
-});
-
-app.get('/book', async (req, res) => {
-  const Books = await Book.find({});
-  res.render('book', {
-    Books,
-  });
-});
-
-app.get('/add', (req, res) => {
-  res.render('add');
-});
-
-app.post('/series', async (req, res) => {
-  const uploadDir = 'public/uploads/serieImage';
-
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-  }
-
-  let uploadeImage = req.files.image;
-  let uploadPath =
-    __dirname + '/public/uploads/SerieImage/' + uploadeImage.name;
-
-  uploadeImage.mv(uploadPath, async () => {
-    await Serie.create({
-      ...req.body,
-      image: '/uploads/SerieImage/' + uploadeImage.name,
-    });
-    res.redirect('/serie');
-  });
-});
-app.delete('/serie/:id', async (req, res) => {
-  const serie = await Serie.findOne({ _id: req.params.id });
-  let deletedImage = __dirname + '/public' + serie.image;
-  fs.unlinkSync(deletedImage);
-  await Serie.findByIdAndRemove(req.params.id);
-  res.redirect('/serie');
-});
-
-app.delete('/movie/:id', async (req, res) => {
-    const movie = await Movie.findOne({ _id: req.params.id });
-    let deletedImage = __dirname + '/public' + movie.image;
-    fs.unlinkSync(deletedImage);
-    await Movie.findByIdAndRemove(req.params.id);
-    res.redirect('/movie');
-  });
-
-  app.delete('/book/:id', async (req, res) => {
-    const book = await Book.findOne({ _id: req.params.id });
-    let deletedImage = __dirname + '/public' + book.image;
-    fs.unlinkSync(deletedImage);
-    await Book.findByIdAndRemove(req.params.id);
-    res.redirect('/book');
-  });
-
-app.post('/movies', async (req, res) => {
-  const uploadDir = 'public/uploads/movieImage';
-
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-  }
-
-  let uploadeImage = req.files.image;
-  let uploadPath =
-    __dirname + '/public/uploads/movieImage/' + uploadeImage.name;
-
-  uploadeImage.mv(uploadPath, async () => {
-    await Movie.create({
-      ...req.body,
-      image: '/uploads/movieImage/' + uploadeImage.name,
-    });
-    res.redirect('/movie');
-  });
-});
-
-app.post('/books', async (req, res) => {
-  const uploadDir = 'public/uploads/bookImage';
-
-  if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir);
-  }
-
-  let uploadeImage = req.files.image;
-  let uploadPath = __dirname + '/public/uploads/bookImage/' + uploadeImage.name;
-
-  uploadeImage.mv(uploadPath, async () => {
-    await Book.create({
-      ...req.body,
-      image: '/uploads/bookImage/' + uploadeImage.name,
-    });
-    res.redirect('/book');
-  });
-});
-
-//Page
-
-app.get('/movie/:id', async (req, res) => {
-  const moviePage = await Movie.findById(req.params.id);
-  res.render('moviePage', {
-    moviePage,
-  });
-});
-
-app.get('/serie/:id', async (req, res) => {
-  const seriePage = await Serie.findById(req.params.id);
-  res.render('seriePage', {
-    seriePage,
-  });
-});
-
-app.get('/book/:id', async (req, res) => {
-  const bookPage = await Book.findById(req.params.id);
-  res.render('bookPage', {
-    bookPage,
-  });
-});
-
+//Page:id
+app.get('/movie/:id', PagesIdControllers.moviePage);
+app.get('/serie/:id', PagesIdControllers.seriePage);
+app.get('/book/:id', PagesIdControllers.bookPage);
+//Delete
+app.delete('/serie/:id', DeleteControllers.serieDelete);
+app.delete('/movie/:id', DeleteControllers.movieDelete);
+app.delete('/book/:id', DeleteControllers.bookDelete);
+//Upload
+app.post('/series', UploadControllers.seriesUpload);
+app.post('/movies', UploadControllers.moviesUpload);
+app.post('/books', UploadControllers.booksUpload);
 //Add
-app.post('/movies', async (req, res) => {
-  await Movie.create(req.body);
-  res.redirect('/');
-});
+app.post('/movies', AddControllers.moviesAdd);
+app.post('/series', AddControllers.seriesAdd);
+app.post('/books', AddControllers.booksAdd);
+//Edit
+app.get('/movie/edit/:id', EditControllers.movieEdit);
+app.put('/movie/:id', EditControllers.moviePage);
 
-app.post('/series', async (req, res) => {
-  await Serie.create(req.body);
-  res.redirect('/');
-});
+app.get('/serie/edit/:id', EditControllers.serieEdit);
+app.put('/serie/:id', EditControllers.seriePage);
 
-app.post('/books', async (req, res) => {
-  await Book.create(req.body);
-  res.redirect('/');
-});
-
-//EDİT
-app.get('/movie/edit/:id', async (req, res) => {
-  const movie = await Movie.findOne({ _id: req.params.id });
-  res.render('movieEdit', {
-    movie,
-  });
-});
-
-app.put('/movie/:id', async (req, res) => {
-  const movie = await Movie.findOne({ _id: req.params.id });
-  movie.title = req.body.title;
-  movie.subitle = req.body.subtitle;
-  movie.description = req.body.description;
-  movie.serial = req.body.serial;
-  movie.status = req.body.status;
-  movie.save();
-  res.redirect(`/movie/${req.params.id}`);
-});
-
-app.get('/serie/edit/:id', async (req, res) => {
-  const serie = await Serie.findOne({ _id: req.params.id });
-  res.render('serieEdit', {
-    serie,
-  });
-});
-
-app.put('/serie/:id', async (req, res) => {
-  const serie = await Serie.findOne({ _id: req.params.id });
-  serie.title = req.body.title;
-  serie.subitle = req.body.subtitle;
-  serie.other = req.body.other;
-  serie.serial = req.body.serial;
-  serie.status = req.body.status;
-  serie.save();
-  res.redirect(`/serie/${req.params.id}`);
-});
-
-app.get('/book/edit/:id', async (req, res) => {
-  const book = await Book.findOne({ _id: req.params.id });
-  res.render('bookEdit', {
-    book,
-  });
-});
-
-app.put('/book/:id', async (req, res) => {
-  const book = await Book.findOne({ _id: req.params.id });
-  book.name = req.body.name;
-  book.author = req.body.author;
-  book.description = req.body.description;
-  book.publisher = req.body.publisher;
-  book.status = req.body.status;
-  book.save();
-  res.redirect(`/book/${req.params.id}`);
-});
+app.get('/book/edit/:id', EditControllers.bookEdit);
+app.put('/book/:id', EditControllers.bookPage);
 
 app.listen(3000, () => {
   console.log('Sunucu Başlatıldı');
