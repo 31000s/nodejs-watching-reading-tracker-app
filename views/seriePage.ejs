@@ -24,7 +24,8 @@
 			<p>
 				<%= seriePage.other %>
 			</p>
-			<a href="/serie/edit/<%= seriePage._id %>">edit</a>
+			<a href="/serie/edit/<%= seriePage._id %>">Düzenle</a>
+			<a href="/serie/<%= seriePage._id %>?_method=DELETE" onclick="return confirm('Emin misin?')">Sil</a>
 
 
 			<br>

@@ -23,7 +23,9 @@
 			<p>
 				<%= moviePage.description %>
 			</p>
-			<a href="/movie/edit/<%= moviePage._id %>">edit</a>
+			<a href="/movie/edit/<%= moviePage._id %>">Güncelle</a>
+			<a href="/movie/<%= moviePage._id %>?_method=DELETE" onclick="return confirm('Emin misin?')">Sil</a>
+
 			<br>
 			<%- include('partials/_footer') -%>
 
