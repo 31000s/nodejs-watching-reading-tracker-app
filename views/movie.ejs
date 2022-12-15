@@ -5,28 +5,40 @@
 	<body>
 		<%- include('partials/_nav') -%>
 
-			<h1>Movies Lists</h1>
-
-			<% for (let i=0; i < Movies.length; i++) { %>
-				<div class="box">
-	
-	
-					<div class="inside">
-						<h2><%= Movies[i].title %></h2>
-						<h3><%= Movies[i].subtitle %></h3>
-						<font><%= Movies[i].serial %></font>
-						<h4><%= Movies[i].status %></h4>
-						<p><%= Movies[i].description %></p>
-					<a href="/movie/<%= Movies[i].slug %>">Gönderiye Git</a>
-					<br><br>
+			<div class="container">
+				<h1>Movies Lists</h1>
+				<% for (let i=0; i < Movies.length; i++) { %>
+					<div class="card mb-3" style="max-width: 540px;">
+						<div class="row no-gutters">
+							<div class="col-md-4">
+								<img src="<%= Movies[i].image %>" style="max-width: 100%;">
+							</div>
+							<div class="col-md-8">
+								<div class="card-body">
+									<h5 class="card-header bg-info">
+										<%= Movies[i].title %>
+									</h5>
+									<br>
+									<p class="card-title">
+										<%= Movies[i].subtitle %>
+									</p>
+									<p class="card-text">
+										<%= Movies[i].description %>
+									</p>
+									<p class="card-text">
+										<%= Movies[i].serial %>
+									</p>
+									<p class="card-text"><small class="text-muted">
+											<%= Movies[i].status %>
+										</small></p>
+									<a href="/movie/<%= Movies[i].slug %>" class="btn btn-primary">Gönderiye Git</a>
+								</div>
+							</div>
+						</div>
 					</div>
-	
-	
-				</div>
-				<br>
-				<% } %>
-
-					<%- include('partials/_footer') -%>
+					<% } %>
+			</div>
+			<%- include('partials/_footer') -%>
 
 	</body>
 

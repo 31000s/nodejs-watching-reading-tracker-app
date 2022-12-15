@@ -7,6 +7,7 @@ exports.movieEdit = async (req, res) => {
   const movie = await Movie.findOne({ slug: req.params.slug });
   res.render('editPages/movieEdit', {
     movie,
+    page:"movie-edit"
   });
 };
 exports.moviePage = async (req, res) => {
@@ -24,6 +25,7 @@ exports.serieEdit = async (req, res) => {
   const serie = await Serie.findOne({ slug: req.params.slug });
   res.render('editPages/serieEdit', {
     serie,
+    page:"serie-edit"
   });
 };
 exports.seriePage = async (req, res) => {
@@ -40,6 +42,7 @@ exports.bookEdit = async (req, res) => {
   const book = await Book.findOne({ slug: req.params.slug });
   res.render('editPages/bookEdit', {
     book,
+    page: "book-edit"
   });
 };
 exports.bookPage = async (req, res) => {

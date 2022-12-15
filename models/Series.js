@@ -9,6 +9,10 @@ const SeriesSchema = new Schema({
     status: { type: String },
     other: { type: String },
     image: { type: String },
+	dateCreated: {
+		type: Date,
+		default: Date.now,
+	  },
 	slug: {
 		type: String,
 		unique: true

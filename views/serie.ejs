@@ -5,34 +5,40 @@
   <body>
     <%- include('partials/_nav') -%>
 
+    <div class="container">
       <h1>Series Lists</h1>
       <% for (let i=0; i < Series.length; i++) { %>
-        <div class="box">
-
-
-          <div class="inside">
-            
-            <h2>
-              <%= Series[i].title %>
-            </h2>
-            <h3>
-              <%= Series[i].subtitle %>
-            </h3>
-            <font>
-              <%= Series[i].serial %>
-            </font>
-            <h4>
-              <%= Series[i].status %>
-            </h4>
-            <p>
-              <%= Series[i].other %>
-            </p>
-            <a href="/serie/<%= Series[i].slug %>">Gönderiye Git</a>
+        <div class="card mb-3" style="max-width: 540px;">
+          <div class="row no-gutters">
+            <div class="col-md-4">
+              <img src="<%= Series[i].image %>" style="max-width: 100%;">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-header bg-info">
+                  <%= Series[i].title %>
+                </h5>
+                <br>
+                <p class="card-text">
+                  <%= Series[i].subtitle %>
+                </p>
+                <p class="card-text">
+                  <%= Series[i].other %>
+                </p>
+                <p class="card-text">
+                  <%= Series[i].serial %>
+                </p>
+                <p class="card-text"><small class="text-muted">
+                    <%= Series[i].status %>
+                  </small></p>
+                <a href="/serie/<%= Series[i].slug %>" class="btn btn-primary">Gönderiye Git</a>
+              </div>
+            </div>
           </div>
-          <br><br>
         </div>
-        <br>
         <% } %>
+
+
 
           <%- include('partials/_footer') -%>
 

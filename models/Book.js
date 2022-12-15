@@ -9,6 +9,10 @@ const BookSchema = new Schema({
   description: { type: String },
   status: { type: String },
   image: { type: String },
+  dateCreated: {
+    type: Date,
+    default: Date.now,
+  },
   slug: {
     type: String,
     unique: true,

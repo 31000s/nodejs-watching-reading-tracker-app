@@ -12,8 +12,7 @@ const Movie = require('./models/Movie');
 const Serie = require('./models/Series');
 const Book = require('./models/Book');
 
-
-const pageRoutes = require('./routes/pageRoute')
+const pageRoutes = require('./routes/pageRoute');
 const ayarlar = require('./token.json');
 
 mongoose.connect(`${ayarlar.mongodbURL}`); //MONGODB VERİTABANI BAĞLANTISI
@@ -34,7 +33,7 @@ app.use(
     secret: 'my_keyboard_cat',
     resave: false,
     saveUninitialized: true,
-    store: MongoStore.create({ mongoUrl: `${ayarlar.mongodbURL}`}),
+    store: MongoStore.create({ mongoUrl: `${ayarlar.mongodbURL}` }),
   })
 );
 app.use(flash());
@@ -45,6 +44,6 @@ app.use((req, res, next) => {
 
 app.use('/', pageRoutes);
 
-app.listen(3000, () => {
+app.listen(8000, () => {
   console.log('Sunucu Başlatıldı');
 });
