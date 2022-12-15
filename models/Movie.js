@@ -1,13 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const slugify = require('slugify');
 
 const MovieSchema = new Schema({
-    title: String,
-    subtitle: String,
-    description: String,
-    serial: String,
-    status: String,
-    image: String
+  title: { type: String},
+  subtitle: { type: String},
+  description: { type: String },
+  serial: { type: String  },
+  status: { type: String },
+  image: { type: String },
+  slug: {
+    type: String,
+    unique: true,
+  },
 });
+
+MovieSchema.pre('validate', function (next) {
+  this.slug = slugify(this.title, {
+    lower: true,
+    strict: true,
+  });
+  next();
+});
+
 const Movie = mongoose.model('Movie', MovieSchema);
 module.exports = Movie;

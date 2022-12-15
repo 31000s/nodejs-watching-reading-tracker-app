@@ -1,13 +1,27 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const slugify = require('slugify')
 
 const SeriesSchema = new Schema({
-    title: String,
-    subtitle: String,
-    serial: String,
-    status: String,
-    other: String,
-    image: String
+    title: { type: String },
+    subtitle: { type: String },
+    serial: { type: String },
+    status: { type: String },
+    other: { type: String },
+    image: { type: String },
+	slug: {
+		type: String,
+		unique: true
+	}
+});
+
+
+SeriesSchema.pre('validate', function(next){
+	this.slug= slugify(this.title, {
+		lower: true,
+		strict: true
+	})
+	next();
 });
 
 const Series = mongoose.model('Series', SeriesSchema);

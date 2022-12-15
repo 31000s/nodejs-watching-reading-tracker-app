@@ -6,7 +6,7 @@
 <body>
   <%- include('../partials/_nav') -%>
 
-    <form action="/book/<%= book._id %>?_method=PUT" method="post" required>
+    <form action="/book/<%= book.slug %>?_method=PUT" method="post" required>
 
       <input type="text" name="name" value="<%= book.name %>" placeholder="Book Name" required>
       <input type="text" name="author" value="<%= book.author %>" placeholder="Book Author" required>

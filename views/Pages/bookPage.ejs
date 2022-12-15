@@ -25,8 +25,8 @@
             <p>
               <%= bookPage.status %>
             </p>
-            <a href="/book/edit/<%= bookPage._id %>">Güncelle</a>
-            <a href="/book/<%= bookPage._id %>?_method=DELETE" onclick="return confirm('Emin misin?')">Sil</a>
+            <a href="/book/edit/<%= bookPage.slug %>">Güncelle</a>
+            <a href="/book/<%= bookPage.slug %>?_method=DELETE" onclick="return confirm('Emin misin?')">Sil</a>
 
             <br><br>
       </div>

@@ -6,7 +6,7 @@
 <body>
   <%- include('../partials/_nav') -%>
 
-    <form action="/serie/<%= serie._id %>?_method=PUT" method="post" required>
+    <form action="/serie/<%= serie.slug %>?_method=PUT" method="post" required>
 
       <input type="text" name="title" value="<%= serie.title %>" placeholder="Series Title" required>
       <input type="text" name="subtitle" value="<%= serie.subtitle %>" placeholder="Series Subtitle" required>
